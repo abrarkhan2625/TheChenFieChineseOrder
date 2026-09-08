@@ -1376,6 +1376,15 @@
 </aside>
 <!-- Cart overlay -->
 <div aria-hidden="true" class="cart-overlay" id="cart-overlay"></div>
+
+<!-- Mobile customers can reach their cart without reopening the menu. -->
+<button aria-label="Open shopping cart" class="mobile-floating-cart" id="mobile-floating-cart" type="button">
+    🛒 Cart
+    <span class="mobile-floating-cart-count" id="mobile-floating-cart-count">0</span>
+</button>
+
+<div aria-live="polite" class="cart-toast" id="cart-toast" role="status"></div>
+
 <!-- =====================================================
          ORDER DETAILS
     ====================================================== -->

@@ -96,6 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileCartCount =
         document.querySelector("#mobile-cart-count");
 
+    const mobileFloatingCartButton =
+        $("mobile-floating-cart");
+
+    const mobileFloatingCartCount =
+        $("mobile-floating-cart-count");
+
+    const cartToast =
+        $("cart-toast");
+
+    let cartToastTimer = null;
+
     const lightbox = $("image-lightbox");
     const lightboxImage = $("lightbox-image");
     const heroImage =
@@ -352,6 +363,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function showCartToast(message) {
+
+        if (!cartToast) {
+            return;
+        }
+
+        cartToast.textContent = message;
+        cartToast.classList.add("is-visible");
+
+        window.clearTimeout(cartToastTimer);
+
+        cartToastTimer = window.setTimeout(
+            () => {
+                cartToast.classList.remove("is-visible");
+            },
+            3200
+        );
+    }
+
+
     /* =====================================================
        UPDATE CART
        ===================================================== */
@@ -369,6 +400,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (mobileCartCount) {
             mobileCartCount.textContent = count;
+        }
+
+
+        if (mobileFloatingCartCount) {
+            mobileFloatingCartCount.textContent = count;
         }
 
 
@@ -620,6 +656,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
+    mobileFloatingCartButton?.addEventListener(
+        "click",
+        openCart
+    );
+
+
     /* =====================================================
        CART QUANTITY BUTTONS
        ===================================================== */
@@ -726,6 +768,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         saveCart();
         updateCart();
+
+        showCartToast(
+            "Added to cart — tap Cart to place your order."
+        );
 
         /* IMPORTANT:
            Do NOT automatically open the cart.
